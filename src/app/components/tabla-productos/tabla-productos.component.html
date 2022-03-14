@@ -1,0 +1,121 @@
+<div class="row">
+    <div class="row">
+        <!-- <button type="button" (click)="addNewItem('yolo')">Add to parent's list</button> -->
+        <form class="d-flex">
+            <input class="form-control me-2" [formControl]="keyWord" placeholder="Buscar por sku o por nombre">
+            <a class="btn btn-outline-success" (click)="buscar()">Buscar</a>
+        </form>
+    </div>
+    <div class="row mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">SKU</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Descripcion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of productos; let i = index" 
+                    (click)="addNewItem(i, item)" [ngClass]="matrizClases[i].btn ? 'table-success' : '' ">
+                    <th scope="row">{{item.sku}}</th>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.precio}}</td>
+                    <td>{{item.descripcion}}</td>
+                    <td *ngIf="btnBotones">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#exampleModal" 
+                            (click)="setProductoActualizar(item.sku)">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger" 
+                            (click)="eliminarProducto(item.sku)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <button *ngIf="btnBotones" type="button" class="btn btn-primary" data-bs-toggle="modal" 
+                data-bs-target="#exampleModal" (click)="btnActualizar=false">
+                <i class="fa fa-plus"></i> Nuevo
+            </button>
+        </div>
+        <div class="col-4">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link btn" (click)="setPageNo(-1)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let item of matrizPaginas">
+                        <a class="page-link btn" (click)="setPageNo(item)">{{item + 1}}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link btn" (click)="setPageNo(-2)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="form" (ngSubmit)="enviarFormulario()">
+                <div class="modal-header">
+                    <h5 *ngIf="!btnActualizar" class="modal-title" id="exampleModalLabel">Nuevo</h5>
+                    <h5 *ngIf="btnActualizar" class="modal-title" id="exampleModalLabel">Editar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+            
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="nombre"
+                            [class.is-invalid]="form.controls['nombre'].touched && form.controls['nombre'].invalid && form.invalid"
+                            required>
+                            <small *ngIf="form.controls['nombre'].touched && form.controls['nombre'].invalid && form.invalid"
+                                class="text-danger">campo no valido</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Precio</label>
+                        <input type="number"
+                                class="form-control"
+                                formControlName="precio"
+                                [class.is-invalid]="form.controls['precio'].touched && form.controls['precio'].invalid && form.invalid"
+                                required>
+                        <small *ngIf="form.controls['precio'].touched && form.controls['precio'].invalid && form.invalid"
+                                class="text-danger">campo no valido</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Descripcion</label>
+                        <input type="text"
+                                class="form-control"
+                                formControlName="descripcion"
+                                [class.is-invalid]="form.controls['descripcion'].touched && form.controls['descripcion'].invalid && form.invalid">
+                    </div>
+            
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button *ngIf="form.invalid" type="submit" class="btn btn-primary" [disabled]="true">Aceptar</button>
+                    <button *ngIf="!form.invalid" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                </div>
+            </form>
+            </div>
+    </div>
+</div>

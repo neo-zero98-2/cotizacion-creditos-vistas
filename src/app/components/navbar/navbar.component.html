@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="https://www.bancoazteca.com.mx/">
+            <img src="../../../assets/img/banco-azteca-logo.png" alt="img" class="logo-img">
+          </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+          <li class="nav-item ">
+            <a class="animacion btn" routerLinkActive="active"  
+            aria-current="page" (click)="goToProductos()" >Administración de productos</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active" >
+            <a class="animacion btn" (click)="goToPlazos()">Administración de plazos</a>
+          </li>
+          <li class="nav-item">
+            <a class="animacion btn" (click)="goToCreditos()">Cotización de créditos</a>
+          </li>
+        </ul>
+        <span class="navbar-text">
+            <i class="fa fa-calendar"></i>
+            {{date}}        
+        </span>
+      </div>
+    </div>
+  </nav>
