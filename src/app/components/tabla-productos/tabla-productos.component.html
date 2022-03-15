@@ -21,7 +21,7 @@
                     (click)="addNewItem(i, item)" [ngClass]="matrizClases[i].btn ? 'table-success' : '' ">
                     <th scope="row">{{item.sku}}</th>
                     <td>{{item.nombre}}</td>
-                    <td>{{item.precio}}</td>
+                    <td>${{item.precio}}</td>
                     <td>{{item.descripcion}}</td>
                     <td *ngIf="btnBotones">
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#exampleModal" 
@@ -81,7 +81,7 @@
                 <div class="modal-body">
             
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                        <label for="exampleInputEmail1" class="form-label">Nombre del producto</label>
                         <input
                             type="text"
                             class="form-control"
@@ -92,7 +92,7 @@
                                 class="text-danger">campo no valido</small>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Precio</label>
+                        <label for="exampleInputPassword1" class="form-label">Precio($MXN)</label>
                         <input type="number"
                                 class="form-control"
                                 formControlName="precio"
