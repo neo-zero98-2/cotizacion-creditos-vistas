@@ -35,7 +35,7 @@ export class CreditosComponent implements OnInit {
   }
 
   incrementPageNo(value:Producto){
-    this.producto=value;
+    this.producto=value;    
   }
 
   obtenerAllPlazos(){
@@ -45,13 +45,16 @@ export class CreditosComponent implements OnInit {
   }
 
   cotizarCredito(){
-    const tazaNormal = this.form.controls['plazo'].value.tazaNormal;
-    const tazaPuntual = this.form.controls['plazo'].value.tazaPuntual;
+    
+    const tazaNormal = this.form.controls['plazo'].value.taza_normal;
+    const tazaPuntual = this.form.controls['plazo'].value.taza_puntual;
     const plazo = this.form.controls['plazo'].value.plazo;
+    
     if(this.producto.sku){
       this.abonoNormal = ((this.producto.precio*tazaNormal) + this.producto.precio)/plazo;
       this.abonoPuntual = ((this.producto.precio*tazaPuntual) + this.producto.precio)/plazo;
     }
+    
     console.log(this.form.controls['plazo'].value);   
   }
 }

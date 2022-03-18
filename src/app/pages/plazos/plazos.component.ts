@@ -23,10 +23,10 @@ export class PlazosComponent implements OnInit {
     plazo: [,[
       Validators.required
     ]],
-    tazaNormal: [,[
+    taza_normal: [,[
       Validators.required
     ]],
-    tazaPuntual: [,[
+    taza_puntual: [,[
       Validators.required
     ]],
   });
@@ -35,7 +35,7 @@ export class PlazosComponent implements OnInit {
     private fb: FormBuilder,
     private plazosService: PlazoService
   ) { 
-    this.pageNo=0;
+    this.pageNo=1;
     this.countPaginas=0;
     this.matrizPaginas=[];
     this.plazo=new Plazo();
@@ -100,11 +100,11 @@ export class PlazosComponent implements OnInit {
   setPageNo(item:number){
     if(item===-1){
       const decrement = this.pageNo-1;
-      this.pageNo = this.pageNo===0 ? 0:decrement;
+      this.pageNo = this.pageNo===1 ? 1:decrement;
     }else if(item===-2){
       const increment = this.pageNo+1;
-      this.pageNo = (this.pageNo+1) < this.countPaginas ? increment : this.pageNo;
-    }else if(item >= 0){
+      this.pageNo = (this.pageNo+1) <= this.countPaginas ? increment : this.pageNo;
+    }else if(item >= 1){
       this.pageNo = item;
     }
     this.obtenerPlazos();
@@ -113,8 +113,8 @@ export class PlazosComponent implements OnInit {
   setPlazoNuevo() {
     this.plazo.idplazos = ""+Date.now();
     this.plazo.plazo = this.form.value.plazo;
-    this.plazo.tazaNormal = this.form.value.tazaNormal;
-    this.plazo.tazaPuntual = this.form.value.tazaPuntual;
+    this.plazo.taza_normal = this.form.value.taza_normal;
+    this.plazo.taza_puntual = this.form.value.taza_puntual;
   }
 
   alert(res:any){

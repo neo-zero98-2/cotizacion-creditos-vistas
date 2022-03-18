@@ -50,7 +50,7 @@ export class TablaProductosComponent implements OnInit {
     private productoService :ProductoService
   ) { 
     this.productos=[];
-    this.pageNo=0;
+    this.pageNo=1;
     this.cantidadProductos = 0;
     this.countPaginas=0;
     this.matrizPaginas=[];
@@ -78,7 +78,7 @@ export class TablaProductosComponent implements OnInit {
 
   obtenerProductos(){
     this.productoService.getProductos(this.pageNo).subscribe(res => {
-      this.productos = res;    
+      this.productos = res;        
       this.countProductos();  
     }, error => console.error(error));
   }
@@ -102,9 +102,9 @@ export class TablaProductosComponent implements OnInit {
         this.cantidadProductos = res;
         this.countPaginas = paginas;
         this.matrizPaginas = [];
-        for (let i = 0; i < this.countPaginas; i++) {
+        for (let i = 1; i <= this.countPaginas; i++) {
           this.matrizPaginas.push(i);
-        }
+        }        
     },error => console.error(error));
   }
 
@@ -133,11 +133,11 @@ export class TablaProductosComponent implements OnInit {
   setPageNo(item:number){
     if(item===-1){
       const decrement = this.pageNo-1;
-      this.pageNo = this.pageNo===0 ? 0:decrement;
+      this.pageNo = this.pageNo===1 ? 1:decrement;
     }else if(item===-2){
       const increment = this.pageNo+1;
-      this.pageNo = (this.pageNo+1) < this.countPaginas ? increment : this.pageNo;
-    }else if(item >= 0){
+      this.pageNo = (this.pageNo+1) <= this.countPaginas ? increment : this.pageNo;
+    }else if(item >= 1){
       this.pageNo = item;
     }
     this.obtenerProductos();
@@ -190,6 +190,7 @@ export class TablaProductosComponent implements OnInit {
       item.btn=false;
       return item;
     });
+    
     this.matrizClases[pos].btn=true; 
     this.newItemEvent.emit(item);
   }

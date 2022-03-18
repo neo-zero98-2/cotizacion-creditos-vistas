@@ -5,18 +5,26 @@
         </div>
         <div class="col-md-4">
             <div class="col-md-12">
-                <form [formGroup]="form">
-                    <select (change)="cotizarCredito()" class="form-select" 
-                    formControlName="plazo" placeholder="yolo">
-                        <option *ngFor="let item of plazos" [ngValue]="item"> 
-                            Plazo de {{item.plazo}} semanas
-                        </option>
-                    </select>
+                <form [formGroup]="form" (submit)="cotizarCredito()">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <select class="form-select" formControlName="plazo"
+                                placeholder="yolo">
+                                <option *ngFor="let item of plazos" [ngValue]="item">
+                                    Plazo de {{item.plazo}} semanas
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-outline-success">Cotizar</button>
+                        </div>
+                    </div>
+
                 </form>
             </div>
             <div class="col-md-12 mt-5" *ngIf="abonoNormal > 0 && abonoPuntual > 0">
-                <p class="fs-3">Abono Normal: <small>${{abonoNormal}}</small></p>
-                <p class="fs-3">Abono Puntual: <small>${{abonoPuntual}}</small></p>
+                <p class="fs-3">Abono Normal: <small>${{abonoNormal | number: '.1-2'}}</small></p>
+                <p class="fs-3">Abono Puntual: <small>${{abonoPuntual | number: '.1-2' }}</small></p>
             </div>
         </div>
     </div>

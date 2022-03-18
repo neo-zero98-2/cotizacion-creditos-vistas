@@ -13,8 +13,8 @@
               <tr *ngFor="let item of plazos">
                 <th scope="row">{{item.idplazos}}</th>
                 <td>{{item.plazo}}</td>
-                <td>{{item.tazaNormal}}</td>
-                <td>{{item.tazaPuntual}}</td>
+                <td>{{item.taza_normal}}</td>
+                <td>{{item.taza_puntual}}</td>
                 <td>
                     <button type="button" class="btn btn-danger" (click)="eliminarPlazo(item.idplazos)">
                         <i class="fa fa-trash"></i>
@@ -69,7 +69,7 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Plazo</label>
                         <input
-                            type="text"
+                            type="number"
                             class="form-control"
                             formControlName="plazo"
                             [class.is-invalid]="form.controls['plazo'].touched && form.controls['plazo'].invalid && form.invalid"
@@ -81,20 +81,20 @@
                         <label for="exampleInputPassword1" class="form-label">Taza normal</label>
                         <input type="number"
                                 class="form-control"
-                                formControlName="tazaNormal"
-                                [class.is-invalid]="form.controls['tazaNormal'].touched && form.controls['tazaNormal'].invalid && form.invalid"
+                                formControlName="taza_normal"
+                                [class.is-invalid]="form.controls['taza_normal'].touched && form.controls['taza_normal'].invalid && form.invalid"
                                 required>
-                        <small *ngIf="form.controls['tazaNormal'].touched && form.controls['tazaNormal'].invalid && form.invalid"
+                        <small *ngIf="form.controls['taza_normal'].touched && form.controls['taza_normal'].invalid && form.invalid"
                                 class="text-danger">campo no valido</small>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Taza puntual</label>
                         <input type="number"
                                 class="form-control"
-                                formControlName="tazaPuntual"
-                                [class.is-invalid]="form.controls['tazaPuntual'].touched && form.controls['tazaPuntual'].invalid && form.invalid"
+                                formControlName="taza_puntual"
+                                [class.is-invalid]="form.controls['taza_puntual'].touched && form.controls['taza_puntual'].invalid && form.invalid"
                                 required>
-                        <small *ngIf="form.controls['tazaPuntual'].touched && form.controls['tazaPuntual'].invalid && form.invalid"
+                        <small *ngIf="form.controls['taza_puntual'].touched && form.controls['taza_puntual'].invalid && form.invalid"
                                 class="text-danger">campo no valido</small>
                     </div>
             
